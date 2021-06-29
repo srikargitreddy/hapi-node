@@ -8,7 +8,7 @@ jobs:
       script:
         - curl -L https://github.com/hapi-server/server-nodejs/releases/download/v0.9.5/hapi-server-v0.9.5-linux-x64.tgz | tar zxf -
         - cd hapi-server-v0.9.5
-        - ./hapi-server --open
+        - hapi-server --test
 
 
     - os: linux
@@ -18,7 +18,7 @@ jobs:
       script:
         - curl -L https://github.com/hapi-server/server-nodejs/releases/download/v0.9.5/hapi-server-v0.9.5-linux-x64.tgz | tar zxf -
         - cd hapi-server-v0.9.5
-        - ./hapi-server --open
+        - hapi-server --test
 
     - os: osx
       osx_image: xcode11.6
@@ -27,7 +27,7 @@ jobs:
       script:
         - curl -L https://github.com/hapi-server/server-nodejs/releases/download/v0.9.5/hapi-server-v0.9.5-darwin-x64.tgz | tar zxf -
         - cd hapi-server-v0.9.5
-        - ./hapi-server --open
+        - ./hapi-server --test
 
 
     - os: osx
@@ -37,4 +37,4 @@ jobs:
       script:
         - curl -L https://github.com/hapi-server/server-nodejs/releases/download/v0.9.5/hapi-server-v0.9.5-darwin-x64.tgz | tar zxf -
         - cd hapi-server-v0.9.5
-        - ./hapi-server --open
+        - ./hapi-server --test
