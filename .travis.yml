@@ -2,36 +2,39 @@ sudo: required
 jobs:
   include:
     - os: linux
-      language: node_js
-      node_js:
-        - "6.16"
+      dist: xenial
+      before_install:
+        - npm i
+      script:
+        - curl -L https://github.com/hapi-server/server-nodejs/releases/download/v0.9.5/hapi-server-v0.9.5-linux-x64.tgz | tar zxf -
+        - cd hapi-server-v0.9.5
+        - ./hapi-server --open
 
-    - os: windows
-      language: node_js
-      node_js:
-        - "8.11.3"
+
+    - os: linux
+      dist: bionic
+      before_install:
+        - npm i
+      script:
+        - curl -L https://github.com/hapi-server/server-nodejs/releases/download/v0.9.5/hapi-server-v0.9.5-linux-x64.tgz | tar zxf -
+        - cd hapi-server-v0.9.5
+        - ./hapi-server --open
 
     - os: osx
-      language: node_js
-      node_js:
-        - "6.16"
+      osx_image: xcode11.6
+      before_install:
+        - npm i
+      script:
+        - curl -L https://github.com/hapi-server/server-nodejs/releases/download/v0.9.5/hapi-server-v0.9.5-darwin-x64.tgz | tar zxf -
+        - cd hapi-server-v0.9.5
+        - ./hapi-server --open
 
 
-before_install:
-  - npm i
-
-script:
-  - npm test
-
-# Trigger build only for these branches
-branches:
-  only:
-  - master
-
-notifications:
-  email:
-    recipients:
-      - rweigel@gmu.edu
-      - ksreddy9945@gmail.com
-  on_success: change
-  on_failure: always
+    - os: osx
+      osx_image: xcode12.4
+      before_install:
+        - npm i
+      script:
+        - curl -L https://github.com/hapi-server/server-nodejs/releases/download/v0.9.5/hapi-server-v0.9.5-darwin-x64.tgz | tar zxf -
+        - cd hapi-server-v0.9.5
+        - ./hapi-server --open
