@@ -18,7 +18,6 @@ fi
 # Use node in path if version > versionmin
 if command -v node > /dev/null 2>&1; then
 	version=$(node -v)
-  
 	versionf=${version//v/}
 	version="${versionf%%.*}"
     if test $version -gt $(($versionmin-1)); then
