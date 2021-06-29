@@ -8,4 +8,4 @@ jobs:
       script:
         - curl -L https://github.com/hapi-server/server-nodejs/releases/download/v0.9.5/hapi-server-v0.9.5-linux-x64.tgz | tar zxf -
         - cd hapi-server-v0.9.5
-        - ./hapi-server --test
+        - /hapi-server --test
