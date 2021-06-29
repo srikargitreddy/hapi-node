@@ -1,0 +1,37 @@
+sudo: required
+jobs:
+  include:
+    - os: linux
+      language: node_js
+      node_js:
+        - "6.16"
+
+    - os: windows
+      language: node_js
+      node_js:
+        - "8.11.3"
+
+    - os: osx
+      language: node_js
+      node_js:
+        - "6.16"
+
+
+before_install:
+  - npm i
+
+script:
+  - npm test
+
+# Trigger build only for these branches
+branches:
+  only:
+  - master
+
+notifications:
+  email:
+    recipients:
+      - rweigel@gmu.edu
+      - ksreddy9945@gmail.com
+  on_success: change
+  on_failure: always
