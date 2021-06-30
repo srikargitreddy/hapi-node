@@ -1,11 +1,10 @@
-sudo: required
-jobs:
-  include:
-    - os: osx
-      osx_image: xcode11.6
-      before_install:
-        - npm i
-      script:
-        - curl -L https://github.com/hapi-server/server-nodejs/releases/download/v0.9.5/hapi-server-v0.9.5-darwin-x64.tgz | tar zxf -
-        - cd hapi-server-v0.9.5
-        - ./hapi-server --test
+before_deploy: "tar -czvf file.tar.gz ./"
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  file: file.tar.gz
+  skip_cleanup: true
+  draft: true
+  on:
+    tags: true
