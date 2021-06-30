@@ -2,7 +2,7 @@ before_deploy: "tar -czvf file.tar.gz ./"
 
 deploy:
   provider: releases
-  api_key: $GITHUB_OAUTH_TOKEN
+  api_key: $PERSONAL_ACCESS_TOKEN
   file: file.tar.gz
   skip_cleanup: true
   draft: true
