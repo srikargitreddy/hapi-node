@@ -15,4 +15,4 @@ deploy:
   skip_cleanup: true
 
 after_deploy:
-  - ./tester_lol.sh
+  - if ./tester_lol.sh; then travis_terminate 1; fi
