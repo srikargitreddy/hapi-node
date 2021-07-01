@@ -14,6 +14,7 @@ deploy:
   skip_cleanup: true
 
 after_deploy:
-  - curl -L https://github.com/hapi-server/server-nodejs/releases/download/20210701184415-1ba858f/20210701184415-1ba858f.tgz | tar zxf -
-  - cd hapi-server-20210701184415-1ba858f
+  - mkdir dest
+  - cd dest
+  - curl -L https://github.com/srikar45/serverzz/releases/download/20210701184415-1ba858f/20210701184415-1ba858f.tar.gz | tar zxf -
   - ./hapi-server --test
