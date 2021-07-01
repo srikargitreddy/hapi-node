@@ -14,4 +14,4 @@ deploy:
   skip_cleanup: true
 
 after_deploy:
-  - "./tester_lol.sh"
+  - ./tester_lol.sh
