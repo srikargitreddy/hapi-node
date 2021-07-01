@@ -12,7 +12,8 @@ deploy:
   api_key: $GITHUB_OAUTH_TOKEN
   file: ${TRAVIS_TAG}.tar.gz
   skip_cleanup: true
-  on.tags: true
+  on:
+    tags: true
 
 after_deploy:
   - echo $TRAVIS_TAG
