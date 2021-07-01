@@ -1,5 +1,5 @@
 language: generic
-##travis_setup_LOL
+##travi
 before_deploy:
   - git config --local user.name "srikar45"
   - git config --local user.email "ksreddy4599@gmail.com"
@@ -12,7 +12,6 @@ deploy:
   api_key: $GITHUB_OAUTH_TOKEN
   file: ${TRAVIS_TAG}.tar.gz
   skip_cleanup: true
-  draft: true
 
 after_deploy:
   - echo $TRAVIS_TAG
