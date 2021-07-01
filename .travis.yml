@@ -1,6 +1,7 @@
 language: generic
 ##travissss
 before_deploy:
+  - "echo 'ready?'"
   - git config --local user.name "srikar45"
   - git config --local user.email "ksreddy4599@gmail.com"
   - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
