@@ -1,5 +1,5 @@
 language: generic
-##travis_setup
+##travis_setup_LOL
 before_deploy:
   - git config --local user.name "srikar45"
   - git config --local user.email "ksreddy4599@gmail.com"
