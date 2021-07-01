@@ -16,4 +16,4 @@ deploy:
 after_deploy:
   - curl -L https://github.com/hapi-server/server-nodejs/releases/download/${TRAVIS_TAG}/${TRAVIS_TAG}.tgz | tar zxf -
   - cd hapi-server-${TRAVIS_TAG}
-  - ./hapi-server --test
+  - ./hapi-server test
