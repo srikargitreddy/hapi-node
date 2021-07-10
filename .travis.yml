@@ -1,5 +1,6 @@
 language: generic
 before_deploy:
+  - npm i release-it --save
   - npm run package
   - npm run release
   - npm run update
@@ -10,6 +11,6 @@ deploy:
   skip_cleanup: true
 
 after_deploy:
-  - npm run package
-  - npm run release
   - npm run update
+  - npm run package
+  - npm run test-packages
