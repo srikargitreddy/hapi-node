@@ -9,7 +9,7 @@ before_deploy:
 deploy:
   api_key: $GITHUB_OAUTH_TOKEN
   script:
-    - npm run releasedd
+    - npm run release
     - npm run update
     - npm run package
     - npm run test-packages
