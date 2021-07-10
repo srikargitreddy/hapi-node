@@ -12,8 +12,6 @@ deploy:
   skip_cleanup: true
   script:
     - npm run release
-
-after_deploy:
-  - npm run update
-  - npm run package
-  - npm run test-packages
+    - npm run update
+    - npm run package
+    - npm run test-packages
