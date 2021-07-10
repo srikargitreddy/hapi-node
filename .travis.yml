@@ -4,10 +4,10 @@ before_deploy:
   #ß#- git config --local user.name "srikar45"##
   #- git config --local user.email "ksreddy4599@gmail.com"
   #- tar -zcf ${TRAVIS_TAG}.tar.gz *
-   - npm install release-it
-   - npm run package
-   - npm run release
-   - npm run update
+  - npm install release-it
+  - npm run package
+  - npm run release
+  - npm run update
 
 deploy:
   provider: releases
