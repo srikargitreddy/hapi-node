@@ -1,6 +1,5 @@
 language: generic
 before_deploy:
-  - npm install release-it
   - npm run package
   - npm run release
   - npm run update
