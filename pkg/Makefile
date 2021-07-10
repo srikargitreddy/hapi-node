@@ -37,7 +37,7 @@ packages:
 
 GITHUB=https://github.com/hapi-server/server-nodejs/releases/download
 package:
-	make files -q
+	make files
 	#Do this if compiled binaries change.
 	#cp bin/node-$(NODEV)-$(OS) dist/hapi-server-$(VERSION)/bin/node
 ifeq ($(OS),win-x64)
