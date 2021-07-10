@@ -7,9 +7,7 @@ before_deploy:
 
 
 deploy:
-  provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
-  skip_cleanup: true
   script:
     - npm run releasedd
     - npm run update
