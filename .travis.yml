@@ -1,7 +1,7 @@
 language: generic
 before_deploy:
   - "echo 'ready?'"
-  #ß#- git config --local user.name "srikar45"
+  #ß#- git config --local user.name "srikar45"##
   #- git config --local user.email "ksreddy4599@gmail.com"
   #- tar -zcf ${TRAVIS_TAG}.tar.gz *
    - npm install release-it
