@@ -5,4 +5,4 @@ script:
   - git config --local user.email "ksreddy4599@gmail.com"
   - npm run package
   - npm run release
-  - GITHUB_TOKEN=$GITHUB_OAUTH_TOKEN release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+  - GITHUB_TOKEN=$GITHUB_OAUTH_TOKEN release-it v2.3 --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
