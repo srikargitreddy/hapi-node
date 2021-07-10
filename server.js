@@ -17,6 +17,7 @@ process.on('SIGINT', function() {
 	process.exit(1);
 });
 
+const superagent = require('superagent');
 const express    = require('express'); 		// Client/server library
 const app        = express();
 const serveIndex = require('serve-index');
@@ -62,6 +63,7 @@ let argv = yargs
 			.alias('logdir','l')
 			.describe('open','Open web page on start')
 			.alias('open','o')
+			.describe('proxy','Allow requests to URLs in all.txt to be proxied (for server-ui).')
 			.describe('test','Run URL tests and exit')
 			.alias('test','t')
 			.describe('verify','Run verification tests on command line and exit')
@@ -85,6 +87,7 @@ let argv = yargs
 				'logdir': __dirname + "/log",
 				'file': __dirname + '/metadata/TestData2.0.json',
 				'port': 8999,
+				'proxy': false,
 				'conf': __dirname + '/conf/server.json',
 				'verifier': 'http://hapi-server.org/verify',
 				'plotserver': 'http://hapi-server.org/plot'
@@ -108,6 +111,7 @@ const PLOTSERVER  = argv.plotserver;
 const HTTPS       = argv.https;
 const KEY_PATH    = argv.key;
 const CERT_PATH   = argv.cert;
+const PROXY       = argv.proxy;
 
 let server;
 
@@ -233,7 +237,7 @@ function main() {
 		}
 	}
 
-	let i = 0;
+	var i = 0;
 	for (let key in metadata.cache) {
 		CATALOGS[i] = metadata.cache[key]['server']['id'];
 		PREFIXES[i] = metadata.cache[key]['server']['prefix'];
@@ -273,6 +277,41 @@ function main() {
 		}
 	}
 
+	if (PROXY) {
+		console.log(ds() + "Configuring proxy end point /proxy.");
+		var tmp = serverlist.split("\n");
+		var serverlistURLs = [];
+		for (var i in tmp) {
+			if (tmp[i] !== '') {
+				console.log(tmp[i].split(",")[0])
+				serverlistURLs.push(tmp[i].split(",")[0]);
+			}
+		}
+
+		app.get('/proxy', function (req, res) {
+			proxyOK = false;
+			let url = decodeURI(req.query.url);
+			if (url !== undefined) {
+				for (i in serverlistURLs) {
+					if (url.startsWith(serverlistURLs[i])) {
+						proxyOK = true;
+						break;
+					}
+				}
+			}
+			if (proxyOK == false) {
+				res.status(404).send("");
+				return;
+			}
+			cors(res);
+			superagent.get(url).end(function (err, res_proxy) {
+				console.log(ds() + "Proxied " + url);
+				res.set(res_proxy.headers);
+				res.send(res_proxy.text);
+			});
+		});
+	}
+
 	app.get('/all.txt', function (req, res) {res.send(serverlist);});
 
 	app.get('/all-dev.txt', function (req,res) {
@@ -290,13 +329,24 @@ function main() {
 	});
 
 
-	let html = fs
-				.readFileSync(__dirname + "/node_modules/hapi-server-ui/index.htm", "utf8")
-				.toString()
-				.replace(/__CATALOG_LIST__/, JSON.stringify(CATALOGS));
+	let indexFile = __dirname + "/node_modules/hapi-server-ui/index.htm";
+	// TODO: Re-read only if index.htm changed?
+	app.get('/', function (req,res) {
+		let html = fs
+					.readFileSync(indexFile, "utf8")
+					.toString()
+					.replace(/__CATALOG_LIST__/, JSON.stringify(CATALOGS));
+		res.send(html);
+	});
 
-	// TODO: If index.htm changes, re-read it.
-	app.get('/', function (req,res) {res.send(html);});
+
+	if (false) {
+		let html = fs
+					.readFileSync(indexFile, "utf8")
+					.toString()
+					.replace(/__CATALOG_LIST__/, JSON.stringify(CATALOGS));
+		app.get('/', function (req,res) {res.send(html);});
+	}
 
 	// Serve static files in ./public/data (no directory listing provided)
 	app.use("/data", express.static(__dirname + '/public/data'));

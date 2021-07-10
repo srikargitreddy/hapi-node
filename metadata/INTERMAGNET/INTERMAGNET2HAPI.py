@@ -7,7 +7,7 @@
 #   python3 INTERMAGNET2HAPI.py TMPDIR
 #
 # Walks the directory tree of ftp.seismo.nrcan.gc.ca/intermagnet to generate a
-# list of files and then writes INTERMAGNET-manifest.{txt,pkl} and then
+# list of files and then writes INTERMAGNET-manifest.{txt,pkl} and then 
 # INTERMAGNET-catalog.json, which is HAPI metadata.
 
 # When True, uses 4 parallel FTP connections when updating manifest
@@ -17,20 +17,20 @@ parallelize = True
 # listing. Takes ~30 minutes when parallelize=True. Set to False if
 # only making corrections to HAPI JSON and not updating list
 # of available files.
-update_manifest = True
+update_manifest = False
 
 # Create a dictionary of the information in INTERMAGNET-manifest.txt
 # Takes ~10 seconds.
-update_pkl = True
+update_pkl = False
 
 # Write a HAPI JSON file using information in INTERMAGNET-manifest.pkl
 # and information in first and last file for each magnetometer.
 # Takes ~3.5 hours (1 minute if first and last files found in TMPDIR).
-update_json = True
-test_N = 2 # Run test on only first test_N datasets. If test_N = None, process all datasets.
+update_json = False 
+test_N = None # Run test on only first test_N datasets. If test_N = None, process all datasets.
 
 # Regenerate index.htm
-update_table = True
+update_table = True 
 
 server = 'ftp.seismo.nrcan.gc.ca'
 
@@ -47,7 +47,6 @@ import datetime as datetime
 
 
 def createmanifest(server, fnametxt):
-    print("In createmanifest : "+ server)
     """Create list of IAGA 2002 files below /intermagnet directory"""
 
     # Could also create manifest.txt using
@@ -73,7 +72,7 @@ def createmanifest(server, fnametxt):
         host = ftputil.FTPHost(server, "anonymous", "anonymous")
         for cadence in cadences:
             path = "/" + cadence + "/" + quality + "/" + "IAGA2002"
-            #print("Finding files under " + "/intermagnet" + path)
+            print("Finding files under " + "/intermagnet" + path)
             for (dirname, subdirs, files) in host.walk("/intermagnet" + path):
                 print('%d files found under %s' % (len(files), dirname))
                 for f in files:
@@ -85,7 +84,7 @@ def createmanifest(server, fnametxt):
         return fname_out
 
     if parallelize and len(qualities) > 1:
-        from joblib import Parallel, delayed
+        from joblib import Parallel, delayed    
         files = Parallel(n_jobs=4)(delayed(cadence_loop)(quality) for quality in qualities)
     else:
         files = []
@@ -116,7 +115,6 @@ def header(url, tmpdir, id):
     if not os.path.exists(filename):
         # Download file if not found in TMPDIR/intermagnet
         print("Downloading " + url)
-        print("With filename "+ filename)
         print(" to")
         print(path)
         try:
@@ -230,9 +228,9 @@ def createjson(fnamepkl, fnamejson, fnametableinfo, tmpdir):
         info["startDate"] = start[0:4] + "-" + start[4:6] + "-" + start[6:8] + "Z"
         info["stopDate"] = stop[0:4] + "-" + stop[4:6] + "-" + stop[6:8] + "Z"
 
-        info["parameters"] = [{
-                                "name": "Time",
-                                "type": "isotime",
+        info["parameters"] = [{ 
+                                "name": "Time", 
+                                "type": "isotime", 
                                 "units": "UTC",
                                 "fill": None,
                                 "length": 24
@@ -240,8 +238,8 @@ def createjson(fnamepkl, fnamejson, fnametableinfo, tmpdir):
 
         info["parameters"].append({
                                     "name": "DOY",
-                                    "type": "integer",
-                                    "units": None,
+                                    "type": "integer", 
+                                    "units": None, 
                                     "fill": None
                                 })
 
@@ -261,7 +259,7 @@ def createjson(fnamepkl, fnamejson, fnametableinfo, tmpdir):
                                 + "where START/STOP are the start/stop dates of interest for the " \
                                 + "component name (e.g., D, I, F, H, X, Y, Z, E, G, or V). " \
                                 + "The component name may not be constant over the duration of available data."
-                            })
+                            }) 
         return info
 
 
@@ -306,9 +304,9 @@ def createjson(fnamepkl, fnamejson, fnametableinfo, tmpdir):
         # 70*40 for header length corresponds to a guess of 40 as
         # the maximum number of header lines. Max encountered is 33.
 
-        info["parameters"] = [{
-                                "name": "Time",
-                                "type": "isotime",
+        info["parameters"] = [{ 
+                                "name": "Time", 
+                                "type": "isotime", 
                                 "units": "UTC",
                                 "fill": None,
                                 "length": 10
@@ -316,8 +314,8 @@ def createjson(fnamepkl, fnamejson, fnametableinfo, tmpdir):
 
         info["parameters"].append({
                                     "name": "Components",
-                                    "type": "string",
-                                    "units": None,
+                                    "type": "string", 
+                                    "units": None, 
                                     "fill": None,
                                     "size": [4],
                                     "length": 1
@@ -356,7 +354,7 @@ def createjson(fnamepkl, fnamejson, fnametableinfo, tmpdir):
             if k == test_N: break
 
         dates = list(s[id]['dates'].keys())
-
+        
         # Get header info for first file
         url = "ftp://" + server + s[id]['dates'][dates[0]]
         meta_first[id] = header(url, tmpdir, id)
@@ -365,10 +363,10 @@ def createjson(fnamepkl, fnamejson, fnametableinfo, tmpdir):
 
         # Get header info for last file
         url = "ftp://" + server + s[id]['dates'][dates[-1]]
-        meta_last[id] = header(url, tmpdir, id)
+        meta_last[id] = header(url, tmpdir, id) 
         meta_last[id]['URL'] = url
         meta_last[id]['Date'] = s[id]['last'].split("/")[-1][3:11]
-
+        
         if 'error' in meta_first[id] and 'error' in meta_last[id]:
             meta_errors[id] = {
                 "meta_first": meta_first[id],
@@ -409,7 +407,7 @@ def createjson(fnamepkl, fnamejson, fnametableinfo, tmpdir):
             catalog[-1]["title"] = ''
 
         catalog[-1]["title"] = catalog[-1]["id"] + " @ " + catalog[-1]["title"]
-
+        
         catalog[-1]["info"] = datainfo(s, id, meta)
 
         # Metadata dataset
@@ -423,7 +421,7 @@ def createjson(fnamepkl, fnamejson, fnametableinfo, tmpdir):
             catalog[-1]["title"] = ''
 
         catalog[-1]["title"] = catalog[-1]["id"] + " @ " + catalog[-1]["title"]
-
+        
         catalog[-1]["info"] = metainfo(s, id, meta)
 
 
@@ -500,20 +498,20 @@ def createtable():
     print('Max # of header lines = ' + str(max_header_N))
 
     l  = ""
-    l  = "<p>Last updated: " + datetime.datetime.now().isoformat() + "</p>"
+    l  = "<p>Last updated: " + datetime.datetime.now().isoformat() + "</p>" 
     l += "<table id='example' class='display dataTable' role='grid'>\n"
     l += "    <tfoot>\n"
     l += "        <tr>\n"
     for column in keys:
         if column != 'parameters' and column != 'Format':
-            l += "            <th>" + column + "</th>\n"
+            l += "            <th>" + column + "</th>\n" 
     l += "        </tr>\n"
     l += "    </tfoot>\n"
     l += "    <thead>\n"
     l += "        <tr>\n"
     for column in keys:
         if column != 'parameters' and column != 'Format':
-            l += "            <th>" + column + "</th>\n"
+            l += "            <th>" + column + "</th>\n" 
     l += "        </tr>\n"
     l += "    </thead>\n"
     l += "    <tbody>\n"
@@ -528,7 +526,7 @@ def createtable():
             s = ""
             if column in meta_all['last'][dataset]:
                 s = meta_all['last'][dataset][column]
-            l += "            <td>" + str(s) + "</td>\n"
+            l += "            <td>" + str(s) + "</td>\n" 
 
         l += "        </tr>\n"
     l += "    </tbody>\n"
@@ -552,7 +550,7 @@ else:
 
 if not os.path.exists('meta'):
     os.makedirs('meta')
-
+    
 fnametxt = 'meta/INTERMAGNET-manifest.txt'
 fnamepkl = 'meta/INTERMAGNET-manifest.pkl'
 fnamejson = 'INTERMAGNET-catalog.json'
@@ -563,13 +561,13 @@ if update_manifest:
     archive(fnametxt)
     createmanifest(server, fnametxt)
 
-# if update_pkl:
-#     archive(fnamepkl)
-#     parsemanifest(fnametxt, fnamepkl)
+if update_pkl:
+    archive(fnamepkl)
+    parsemanifest(fnametxt, fnamepkl)
 
-# if update_json:
-#     archive(fnamejson)
-#     createjson(fnamepkl, fnamejson, fnametableinfo, tmpdir)
+if update_json:
+    archive(fnamejson)
+    createjson(fnamepkl, fnamejson, fnametableinfo, tmpdir)
 
-# if update_table:
-#     createtable()
+if update_table:
+    createtable()
