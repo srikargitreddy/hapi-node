@@ -89,6 +89,9 @@ release:
 	make update VERSION=$(VERSION);
 	#cd .. && . pkg/GITHUB_TOKEN && release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
+go_release:
+	release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+
 docker-test:
 	docker exec -it hapi-server-$(VERSION) ./hapi-server test
 	docker stop hapi-server-$(VERSION)
