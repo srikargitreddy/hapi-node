@@ -22,7 +22,7 @@ ifeq ($(OS),darwin-x64)
 	SERVER=pro2
 endif
 
-# When NodeJS and Python binaries do not need to be updated.
+# When NodeJS and Python binaries do not need to be updated..
 update:
 	#sed -E -i '' 's/hapi-server-v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server-$(VERSION)/g' ../README.md
 	#sed -E -i '' 's/VERSION=v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/VERSION=$(VERSION)/g' Makefile
