@@ -24,8 +24,8 @@ endif
 
 # When NodeJS and Python binaries do not need to be updated.
 update:
-	sed -E -i '' 's/hapi-server-v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server-$(VERSION)/g' ../README.md	
-	sed -E -i '' 's/hapi-server:v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server:$(VERSION)/g' ../README.md	
+	sed -E -i '' 's/hapi-server-v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server-$(VERSION)/g' ../README.md
+	sed -E -i '' 's/hapi-server:v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server:$(VERSION)/g' ../README.md
 	sed -E -i '' 's/VERSION=v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/VERSION=$(VERSION)/g' Makefile
 	sed -E -i '' 's/VERSION="v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}"/VERSION="$(VERSION)"/g' ../server.js
 	make packages
@@ -87,7 +87,7 @@ docker:
 release:
 	cd ..; rm -rf node_modules; npm install --production;
 	make update VERSION=$(VERSION);
-	cd .. && source pkg/GITHUB_TOKEN && release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+	cd .. && release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 docker-test:
 	docker exec -it hapi-server-$(VERSION) ./hapi-server test
@@ -123,7 +123,7 @@ clean:
 
 
 # Did this on High Sierra
-darwin-x64: 
+darwin-x64:
 	make node0 OS=darwin-x64
 	make package OS=darwin-x64
 
