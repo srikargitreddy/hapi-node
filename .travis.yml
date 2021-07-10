@@ -3,7 +3,6 @@ before_deploy:
   - npm i release-it --save
   - npm run package
   - npm run release
-  - release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
   - npm run update
 
 deploy:
