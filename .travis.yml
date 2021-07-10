@@ -1,12 +1,7 @@
 language: generic
-before_deploy:
+script:
   - npm i release-it --save
   - git config --local user.name "srikar45"
   - git config --local user.email "ksreddy4599@gmail.com"
   - npm run package
-
-
-deploy:
-  api_key: $GITHUB_OAUTH_TOKEN
-  script:
-    - npm run releases
+  - npm run release
