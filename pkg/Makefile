@@ -37,7 +37,7 @@ packages:
 
 GITHUB=https://github.com/hapi-server/server-nodejs/releases/download
 package:
-	make files -s
+	make files
 	#Do this if compiled binaries change.
 	#cp bin/node-$(NODEV)-$(OS) dist/hapi-server-$(VERSION)/bin/node
 ifeq ($(OS),win-x64)
@@ -75,7 +75,7 @@ zip:
 	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION)
 
 targz:
-	cd dist; tar zcvf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION)
+	cd dist; tar zcvf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION) -f
 
 docker:
 	- docker stop hapi-server
