@@ -87,7 +87,7 @@ docker:
 release:
 	cd ..; rm -rf node_modules; npm install --production;
 	make update VERSION=$(VERSION);
-	cd .. && source GITHUB_TOKEN=$GITHUB_OAUTH_TOKEN && release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+
 
 docker-test:
 	docker exec -it hapi-server-$(VERSION) ./hapi-server test
