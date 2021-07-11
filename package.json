@@ -25,6 +25,7 @@
     "hapi-server-verifier": "git+https://github.com/hapi-server/verifier-nodejs.git#master",
     "https": "^1.0.0",
     "moment": "^2.18.1",
+    "release-it": "^14.10.0",
     "serve-index": "^1.9.1",
     "shelljs": "^0.8.4",
     "superagent": "^6.1.0",
@@ -43,8 +44,7 @@
     "package": "cd pkg; make update VERSION=v$npm_package_version",
     "test-packages": "cd pkg; make test-packages VERSION=v$npm_package_version",
     "release": "cd pkg; make release VERSION=v$npm_package_version",
-    "go_release" : "cd pkg; make go_release VERSION=v$npm_package_version"
-
+    "go_release": "cd pkg; make go_release VERSION=v$npm_package_version"
   },
   "bin": "server.js",
   "release-it": {

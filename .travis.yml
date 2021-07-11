@@ -5,4 +5,3 @@ script:
   - git config --local user.email "ksreddy4599@gmail.com"
   - npm run package
   - npm run release
-  - GITHUB_TOKEN=$GITHUB_OAUTH_TOKEN && npm run go_release
