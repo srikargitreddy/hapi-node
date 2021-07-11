@@ -1,1 +1,1 @@
-export GITHUB_TOKEN="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"
+export GITHUB_TOKEN="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"
