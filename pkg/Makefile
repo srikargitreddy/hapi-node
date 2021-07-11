@@ -2,7 +2,7 @@ NODEV=v6.16.0
 NODED=https://nodejs.org/dist/latest-v6.x
 # Do not modify following line. Version set by call to
 #   npm run update
-# which uses version in package.json
+# which uses version in package.json#
 VERSION=v1.0.0
 
 # To get other OS-X versions, see
@@ -24,10 +24,6 @@ endif
 
 # When NodeJS and Python binaries do not need to be updated.
 update:
-	sed -E -i '' 's/hapi-server-v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server-$(VERSION)/g' ../README.md
-	sed -E -i '' 's/hapi-server:v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server:$(VERSION)/g' ../README.md
-	sed -E -i '' 's/VERSION=v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/VERSION=$(VERSION)/g' Makefile
-	sed -E -i '' 's/VERSION="v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}"/VERSION="$(VERSION)"/g' ../server.js
 	make packages
 	rm -rf dist/hapi-server-$(VERSION)/
 
