@@ -7,7 +7,7 @@ pkg/bin
 pkg/dist
 pkg/python
 pkg/tgz
-pkg/GITHUB_TOKEN
+pkg/GITHUB_TOKEN.sh
 public/data/QinDenton/
 nohup.out
 metadata/SSCWeb/SSCWeb-catalog.json
@@ -17,4 +17,3 @@ metadata/INTERMAGNET/meta/*
 metadata/INTERMAGNET/ftp.seismo.nrcan.gc.ca/*
 metadata/INTERMAGNET/INTERMAGNET-catalog.json
 metadata/INTERMAGNET/html/index.htm
-
