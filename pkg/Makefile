@@ -25,7 +25,7 @@ endif
 # When NodeJS and Python binaries do not need to be updated.
 update:
 	npm version patch --no-git-tag-version
-	make packages
+	make packages &
 	rm -rf dist/hapi-server-$(VERSION)/
 
 packages:
@@ -70,10 +70,10 @@ files:
 	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale
 
 zip:
-	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION)
+	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION) &
 
 targz:
-	cd dist; tar zcvf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION)
+	cd dist; tar zcvf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION) &
 
 docker:
 	- docker stop hapi-server
