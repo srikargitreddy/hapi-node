@@ -5,7 +5,7 @@ NODED=https://nodejs.org/dist/latest-v6.x
 # which uses version in package.json
 VERSION=v1.0.0
 
-# To get other OS-X versions, see
+# To get other OS-X versions, seee
 # https://developer.apple.com/forums/thread/111322
 OS=darwin-x64
 #OS=linux-x64
