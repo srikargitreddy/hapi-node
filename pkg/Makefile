@@ -76,10 +76,10 @@ files:
 	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale
 
 zip:
-	cd dist; @zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION) &
+	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION) &>file1.txt 
 
 targz:
-	cd dist; @tar zcvf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION)
+	cd dist; tar zcvf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION) &>file.txt
 
 docker:
 	- docker stop hapi-server
