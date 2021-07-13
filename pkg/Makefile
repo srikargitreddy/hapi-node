@@ -31,7 +31,7 @@ update:
 	  | awk -F: '{ print $2 }' \
 	  | sed 's/[",]//g' \
 	  | tr -d '[[:space:]]')
-	make packages
+	@make packages
 	rm -rf dist/hapi-server-$(VERSION)/
 
 packages:
@@ -89,7 +89,7 @@ docker:
 
 release:
 	cd ..; rm -rf node_modules; npm install --production;
-	make update VERSION=$(VERSION);
+	@make update VERSION=$(VERSION);
 	cd .. && release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 docker-test:
