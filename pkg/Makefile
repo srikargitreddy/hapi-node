@@ -1,3 +1,5 @@
+.SILENT:
+	
 NODEV=v6.16.0
 NODED=https://nodejs.org/dist/latest-v6.x
 # Do not modify following line. Version set by call to
