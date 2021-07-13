@@ -76,10 +76,10 @@ files:
 	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale
 
 zip:
-	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION) &
+	cd dist; @zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION) &
 
 targz:
-	cd dist; tar zcvf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION)
+	cd dist; @tar zcvf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION)
 
 docker:
 	- docker stop hapi-server
@@ -89,7 +89,7 @@ docker:
 
 release:
 	cd ..; rm -rf node_modules; npm install --production;
-	@make update VERSION=$(VERSION);
+	make update VERSION=$(VERSION);
 	cd .. && release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 docker-test:
