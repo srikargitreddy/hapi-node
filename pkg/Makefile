@@ -71,15 +71,15 @@ files:
 		../ dist/hapi-server-$(VERSION)
 	rm -rf dist/hapi-server-$(VERSION)/package*
 	rm -rf dist/hapi-server-$(VERSION)/.git* -f
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src &
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min &
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale &
 
 zip:
 	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION)
 
 targz:
-	cd dist; tar zcvf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION)
+	cd dist; tar zcvf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION) &
 
 docker:
 	- docker stop hapi-server
