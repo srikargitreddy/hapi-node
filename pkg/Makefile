@@ -71,9 +71,9 @@ files:
 		../ dist/hapi-server-$(VERSION)
 	rm -rf dist/hapi-server-$(VERSION)/package*
 	rm -rf dist/hapi-server-$(VERSION)/.git* -f
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src > /dev/null
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min > /dev/null
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale > /dev/null
 
 zip:
 	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION)
