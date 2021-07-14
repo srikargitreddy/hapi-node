@@ -62,18 +62,18 @@ else
 endif
 
 files:
-	rm -rf dist/hapi-server-$(VERSION) -f
+	rm -rf dist/hapi-server-$(VERSION) > /dev/null
 	mkdir -p dist/hapi-server-$(VERSION)
 	rsync -aq \
 		--exclude pkg \
 		--exclude .git \
 		--exclude public/data/QinDenton \
 		../ dist/hapi-server-$(VERSION)
-	rm -rf dist/hapi-server-$(VERSION)/package* -f
+	rm -rf dist/hapi-server-$(VERSION)/package*
 	rm -rf dist/hapi-server-$(VERSION)/.git* -f
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src -f
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min -f
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale -f
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale
 
 zip:
 	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION)
