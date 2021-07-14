@@ -69,11 +69,11 @@ files:
 		--exclude .git \
 		--exclude public/data/QinDenton \
 		../ dist/hapi-server-$(VERSION)
-	rm -rf dist/hapi-server-$(VERSION)/package*
-	rm -rf dist/hapi-server-$(VERSION)/.git*
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale
+	rm -rf dist/hapi-server-$(VERSION)/package* -f
+	rm -rf dist/hapi-server-$(VERSION)/.git* -f
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src -f
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min -f
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale -f
 
 zip:
 	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION)
