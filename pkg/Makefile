@@ -62,7 +62,7 @@ else
 endif
 
 files:
-	rm -rf dist/hapi-server-$(VERSION)
+	rm -rf dist/hapi-server-$(VERSION) -f
 	mkdir -p dist/hapi-server-$(VERSION)
 	rsync -aq \
 		--exclude pkg \
