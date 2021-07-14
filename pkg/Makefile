@@ -6,7 +6,7 @@ NODED=https://nodejs.org/dist/latest-v6.x
 VERSION=v1.0.0
 
 # To get other OS-X versions, seee
-# https://developer.apple.com/forums/thread/111322
+# https://developer.apple.com/forums/thread/1113222
 OS=darwin-x64
 #OS=linux-x64
 #OS=linux-armv7l
