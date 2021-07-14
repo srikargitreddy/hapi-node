@@ -48,7 +48,7 @@ ifeq ($(OS),win-x64)
 	# Not tested
 else
 	# Use comiled binaries from a previous release
-	cd /tmp; curl -L -O $(GITHUB)/v0.9.5/hapi-server-v0.9.5-$(OS).tgz &
+	cd /tmp; curl -L -O $(GITHUB)/v0.9.5/hapi-server-v0.9.5-$(OS).tgz
 	cd /tmp; tar zxf hapi-server-v0.9.5-$(OS).tgz \
 		hapi-server-v0.9.5/bin/node hapi-server-v0.9.5/bin/python
 	mv /tmp/hapi-server-v0.9.5/bin/node dist/hapi-server-$(VERSION)/bin
@@ -62,7 +62,7 @@ else
 endif
 
 files:
-	rm -rf dist/hapi-server-$(VERSION)
+	rm -rf dist/hapi-server-$(VERSION) &
 	mkdir -p dist/hapi-server-$(VERSION)
 	rsync -aq \
 		--exclude pkg \
