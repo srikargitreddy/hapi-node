@@ -48,7 +48,7 @@ ifeq ($(OS),win-x64)
 	# Not tested
 else
 	# Use comiled binaries from a previous release
-	cd /tmp; curl -L -O $(GITHUB)/v0.9.5/hapi-server-v0.9.5-$(OS).tgz
+	cd /tmp; curl -L -O $(GITHUB)/v0.9.5/hapi-server-v0.9.5-$(OS).tgz &
 	cd /tmp; tar zxf hapi-server-v0.9.5-$(OS).tgz \
 		hapi-server-v0.9.5/bin/node hapi-server-v0.9.5/bin/python
 	mv /tmp/hapi-server-v0.9.5/bin/node dist/hapi-server-$(VERSION)/bin
@@ -62,8 +62,7 @@ else
 endif
 
 files:
-	mkdir /dev/null
-	rm -rf dist/hapi-server-$(VERSION) > /dev/null
+	rm -rf dist/hapi-server-$(VERSION)
 	mkdir -p dist/hapi-server-$(VERSION)
 	rsync -aq \
 		--exclude pkg \
@@ -72,15 +71,15 @@ files:
 		../ dist/hapi-server-$(VERSION)
 	rm -rf dist/hapi-server-$(VERSION)/package*
 	rm -rf dist/hapi-server-$(VERSION)/.git* -f
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src > /dev/null
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min > /dev/null
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale > /dev/null
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale
 
 zip:
 	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION)
 
 targz:
-	cd dist; tar zcvf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION) &> /dev/null
+	cd dist; tar zcvf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION)
 
 docker:
 	- docker stop hapi-server
