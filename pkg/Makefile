@@ -62,6 +62,7 @@ else
 endif
 
 files:
+	mkdir /dev/null
 	rm -rf dist/hapi-server-$(VERSION) > /dev/null
 	mkdir -p dist/hapi-server-$(VERSION)
 	rsync -aq \
