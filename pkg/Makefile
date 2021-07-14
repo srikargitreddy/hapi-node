@@ -1,6 +1,6 @@
 NODEV=v6.16.0
 NODED=https://nodejs.org/dist/latest-v6.x
-# Do not modify following line. Version set by call to
+# Do not modify following line. Version set by call t
 #   npm run update
 # which uses version in package.json
 VERSION=v1.0.0
