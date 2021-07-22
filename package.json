@@ -1,6 +1,6 @@
 {
   "name": "hapi-server",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "license": "MIT",
   "engine-strict": true,
   "engines": {
@@ -25,7 +25,7 @@
     "hapi-server-verifier": "git+https://github.com/hapi-server/verifier-nodejs.git#master",
     "https": "^1.0.0",
     "moment": "^2.18.1",
-    "release-it": "^14.10.0",
+    "release-it": "^13.2.0",
     "serve-index": "^1.9.1",
     "shelljs": "^0.8.4",
     "superagent": "^6.1.0",
