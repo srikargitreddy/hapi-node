@@ -31,7 +31,8 @@ update:
 		| awk -F: '{ print $2 }' \
 		| sed 's/[",]//g' \
 		| tr -d '[[:space:]]')
-
+  echo " VERSION is"
+	echo $(VERSION)
 	#pwd; sed -E -i '' 's/hapi-server-v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server-$(VERSION)/g' ../README.md
 	#sed -E -i '' 's/hapi-server:v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server:$(VERSION)/g' ../README.md
 	#sed -E -i '' 's/VERSION=v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/VERSION=$(VERSION)/g' Makefile
