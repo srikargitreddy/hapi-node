@@ -28,8 +28,7 @@ release:
 	make update VER=`node -p "require('../package.json').version"`
 	git remote set-url origin https://js2me:${GITHUB_TOKEN}@github.com/srikar45/serverzz.git
 	git checkout master
-	git tag -a v1.0.9
-	cd .. && release-it "v1.0.9" --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+	cd .. && release-it VER --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 
 # When NodeJS and Python binaries do not need to be updated..

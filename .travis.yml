@@ -6,7 +6,6 @@ script:
   - git config --local user.email "ksreddy4599@gmail.com"
   - echo $GITHUB_OAUTH_TOKEN
   - export GITHUB_TOKEN=$GITHUB_OAUTH_TOKEN
-  - travis encrypt 'GIT_NAME="srikar45" GIT_EMAIL="ksreddy4599@gmail.com" GH_TOKEN=$GITHUB_OAUTH_TOKEN'
   - npm run release GIT_TOKEN=$GITHUB_OAUTH_TOKEN
 
 # script:
