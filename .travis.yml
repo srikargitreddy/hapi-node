@@ -5,7 +5,7 @@ script:
   - git config --local user.name "srikar45"
   - git config --local user.email "ksreddy4599@gmail.com"
   - echo $GITHUB_OAUTH_TOKEN
-  export GITHUB_TOKEN=$GITHUB_OAUTH_TOKEN
+  - export GITHUB_TOKEN=$GITHUB_OAUTH_TOKEN
   - npm run release GIT_TOKEN=$GITHUB_OAUTH_TOKEN
 
 
