@@ -24,27 +24,20 @@ endif
 
 
 release:
+	npm version patch --no-git-tag-version
 	cd ..; rm -rf node_modules; npm install --production;
-	make update
-	cd .. && GITHUB_TOKEN=$(TOKEN) && release-it "v1.0.8" --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+	make update VER=`node -p "require('../package.json').version"`
+	cd .. && GITHUB_TOKEN=$(TOKEN) && release-it `node -p "require('../package.json').version"` --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 
 # When NodeJS and Python binaries do not need to be updated..
 update:
-	npm version patch --no-git-tag-version
-	$(VERSION)=$(cat package.json \
-		| grep version \
-		| head -1 \
-		| awk -F: '{ print $2 }' \
-		| sed 's/[",]//g' \
-		| tr -d '[[:space:]]')
-
 	#pwd; sed -E -i '' 's/hapi-server-v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server-$(VERSION)/g' ../README.md
 	#sed -E -i '' 's/hapi-server:v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server:$(VERSION)/g' ../README.md
 	#sed -E -i '' 's/VERSION=v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/VERSION=$(VERSION)/g' Makefile
 
-	make packages VERSION=$(VERSION)
-	rm -rf dist/hapi-server-$(VERSION)/
+	make packages VERSION=$(VER)
+	rm -rf dist/hapi-server-$(VER)/
 
 packages:
 	make package OS=darwin-x64 VERSION=$(VERSION)
@@ -74,7 +67,7 @@ else
 endif
 
 files:
-	rm -rf dist/hapi-server-$(VERSION) &
+	rm -rf dist/hapi-server-$(VERSION)
 	mkdir -p dist/hapi-server-$(VERSION)
 	rsync -aq \
 		--exclude pkg \
@@ -82,10 +75,11 @@ files:
 		--exclude public/data/QinDenton \
 		../ dist/hapi-server-$(VERSION)
 	rm -rf dist/hapi-server-$(VERSION)/package*
-	rm -rf dist/hapi-server-$(VERSION)/.git* -f
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src &
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min &
-	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale &
+	rm -rf dist/hapi-server-$(VERSION)/.git*
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/src
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/min
+	rm -rf dist/hapi-server-$(VERSION)/node_modules/moment/locale
+
 
 zip:
 	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION)
