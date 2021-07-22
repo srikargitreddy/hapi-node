@@ -22,16 +22,23 @@ ifeq ($(OS),darwin-x64)
 	SERVER=pro2
 endif
 
+
+release:
+	cd ..; rm -rf node_modules; npm install --production;
+	make update
+	cd .. && GITHUB_TOKEN=$(TOKEN) && release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+
+
 # When NodeJS and Python binaries do not need to be updated..
 update:
 	npm version patch --no-git-tag-version
-	VERSION=$(cat package.json \
+	VERSION:=$(cat package.json \
 		| grep version \
 		| head -1 \
 		| awk -F: '{ print $2 }' \
 		| sed 's/[",]//g' \
 		| tr -d '[[:space:]]')
-		
+
 	echo $(VERSION)
 	#pwd; sed -E -i '' 's/hapi-server-v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server-$(VERSION)/g' ../README.md
 	#sed -E -i '' 's/hapi-server:v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server:$(VERSION)/g' ../README.md
@@ -93,10 +100,6 @@ docker:
 	docker build --file Dockerfile -t rweigel/hapi-server:$(VERSION) ../
 	docker run -dit --name hapi-server-$(VERSION) --expose 8999 -p 8999:8999 rweigel/hapi-server:$(VERSION)
 
-release:
-	cd ..; rm -rf node_modules; npm install --production;
-	make update
-	cd .. && GITHUB_TOKEN=$(TOKEN) && release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 docker-test:
 	docker exec -it hapi-server-$(VERSION) ./hapi-server test
