@@ -4,7 +4,7 @@ script:
   - git config --local user.name "srikar45"
   - git config --local user.email "ksreddy4599@gmail.com"
   - make update
-  - npm run release TOKEN=$GITHUB_OAUTH_TOKEN
+  #- npm run release TOKEN=$GITHUB_OAUTH_TOKEN
 
 
 
