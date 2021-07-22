@@ -1,7 +1,7 @@
 language: generic
 node_js: "10.16.3"
 script:
-  - npm i release-it --save
+  - npm i release-it@12.0.1 --save
   - npm install eslint@6 -g
   - git config --local user.name "srikar45"
   - git config --local user.email "ksreddy4599@gmail.com"
