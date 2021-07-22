@@ -3,5 +3,19 @@ script:
   - npm i release-it --save
   - git config --local user.name "srikar45"
   - git config --local user.email "ksreddy4599@gmail.com"
-  - npm run package
-  - npm run release
+  - make update
+  - npm run release TOKEN=$GITHUB_OAUTH_TOKEN
+
+
+
+# script:
+#   - npm i release-it --save
+#   - git config --local user.name "sirkar45"
+#   - git config --local user.email "ksreddy4599@gmail.com"
+#   - npm run package
+#   - npm run release
+#   - make update
+#
+# #After depploy
+#   - npm run package
+#   - npm run test-packages

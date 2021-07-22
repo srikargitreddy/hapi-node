@@ -26,12 +26,17 @@ endif
 update:
 	npm version patch --no-git-tag-version
 	VERSION=$(cat package.json \
-	  | grep version \
-	  | head -1 \
-	  | awk -F: '{ print $2 }' \
-	  | sed 's/[",]//g' \
-	  | tr -d '[[:space:]]')
-	@make packages
+		| grep version \
+		| head -1 \
+		| awk -F: '{ print $2 }' \
+		| sed 's/[",]//g' \
+		| tr -d '[[:space:]]')
+
+	#pwd; sed -E -i '' 's/hapi-server-v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server-$(VERSION)/g' ../README.md
+	#sed -E -i '' 's/hapi-server:v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server:$(VERSION)/g' ../README.md
+	#sed -E -i '' 's/VERSION=v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/VERSION=$(VERSION)/g' Makefile
+
+	make packages VERSION=$(VERSION)
 	rm -rf dist/hapi-server-$(VERSION)/
 
 packages:
@@ -79,7 +84,7 @@ zip:
 	cd dist; zip -r hapi-server-$(VERSION)-$(OS).zip hapi-server-$(VERSION)
 
 targz:
-	cd dist; tar zcvf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION) &
+	cd dist; tar zcf hapi-server-$(VERSION)-$(OS).tgz hapi-server-$(VERSION)
 
 docker:
 	- docker stop hapi-server
@@ -90,7 +95,7 @@ docker:
 release:
 	cd ..; rm -rf node_modules; npm install --production;
 	make update VERSION=$(VERSION);
-	cd .. && release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+	cd .. && GITHUB_TOKEN=$(TOKEN) && release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 docker-test:
 	docker exec -it hapi-server-$(VERSION) ./hapi-server test
