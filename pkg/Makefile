@@ -22,7 +22,6 @@ ifeq ($(OS),darwin-x64)
 	SERVER=pro2
 endif
 
-
 release:
 	npm version patch --no-git-tag-version
 	cd ..; rm -rf node_modules; npm install --production;
