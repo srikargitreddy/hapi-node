@@ -94,7 +94,7 @@ docker:
 
 release:
 	cd ..; rm -rf node_modules; npm install --production;
-	make update VERSION=$(VERSION);
+	make update
 	cd .. && GITHUB_TOKEN=$(TOKEN) && release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 docker-test:
