@@ -26,7 +26,7 @@ release:
 	npm version patch --no-git-tag-version
 	cd ..; rm -rf node_modules; npm install --production;
 	make update VER=`node -p "require('../package.json').version"`
-	git remote add origin https://js2me:${GITHUB_TOKEN}@github.com/srikar45/serverzz.git
+	git remote set-url origin https://js2me:${GITHUB_TOKEN}@github.com/srikar45/serverzz.git
 	git checkout master
 	cd .. && release-it "v1.0.9" --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
