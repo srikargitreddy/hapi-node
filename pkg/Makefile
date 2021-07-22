@@ -26,20 +26,19 @@ endif
 release:
 	cd ..; rm -rf node_modules; npm install --production;
 	make update
-	cd .. && GITHUB_TOKEN=$(TOKEN) && release-it $(VERSION) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+	cd .. && GITHUB_TOKEN=$(TOKEN) && release-it "v1.0.8" --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 
 # When NodeJS and Python binaries do not need to be updated..
 update:
 	npm version patch --no-git-tag-version
-	VERSION:=$(cat package.json \
+	VERSION=$(cat package.json \
 		| grep version \
 		| head -1 \
 		| awk -F: '{ print $2 }' \
 		| sed 's/[",]//g' \
 		| tr -d '[[:space:]]')
 
-	echo $(VERSION)
 	#pwd; sed -E -i '' 's/hapi-server-v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server-$(VERSION)/g' ../README.md
 	#sed -E -i '' 's/hapi-server:v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server:$(VERSION)/g' ../README.md
 	#sed -E -i '' 's/VERSION=v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/VERSION=$(VERSION)/g' Makefile
