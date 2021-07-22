@@ -26,7 +26,6 @@ release:
 	npm version patch --no-git-tag-version
 	cd ..; rm -rf node_modules; npm install --production;
 	make update VER=`node -p "require('../package.json').version"`
-	export GITHUB_TOKEN=$(GIT_TOKEN)
 	cd .. && release-it "v1.0.9" --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 

@@ -8,8 +8,6 @@ script:
   - export GITHUB_TOKEN=$GITHUB_OAUTH_TOKEN
   - npm run release GIT_TOKEN=$GITHUB_OAUTH_TOKEN
 
-
-
 # script:
 #   - npm i release-it --save
 #   - git config --local user.name "sirkar45"
