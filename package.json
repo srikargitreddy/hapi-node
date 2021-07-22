@@ -49,6 +49,7 @@
   "release-it": {
     "github": {
       "release": true,
+      "tokenRef": "$GITHUB_TOKEN",
       "assets": [
         "pkg/dist/*.tgz"
       ]
