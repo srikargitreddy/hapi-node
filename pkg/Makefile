@@ -32,7 +32,7 @@ release:
 # When NodeJS and Python binaries do not need to be updated..
 update:
 	npm version patch --no-git-tag-version
-	VERSION=$(cat package.json \
+	$(VERSION)=$(cat package.json \
 		| grep version \
 		| head -1 \
 		| awk -F: '{ print $2 }' \
