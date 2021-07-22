@@ -22,7 +22,7 @@ ifeq ($(OS),darwin-x64)
 	SERVER=pro2
 endif
 
-# When NodeJS and Python binaries do not need to be updated.
+# When NodeJS and Python binaries do not need to be updated..
 update:
 	npm version patch --no-git-tag-version
 	VERSION=$(cat package.json \
