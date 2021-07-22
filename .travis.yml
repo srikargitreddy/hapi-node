@@ -1,8 +1,6 @@
 language: generic
-node_js: "10.16.3"
 script:
-  - npm i release-it@12.0.1 --save
-  - npm install eslint@6 -g
+  - npm i release-it@13.2.0 --save
   - git config --local user.name "srikar45"
   - git config --local user.email "ksreddy4599@gmail.com"
   - npm run release TOKEN=$GITHUB_OAUTH_TOKEN
