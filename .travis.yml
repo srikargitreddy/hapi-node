@@ -1,4 +1,5 @@
-language: generic
+language: node_js
+node_js: "10.16.3"
 script:
   - npm i release-it@13.2.0 --save
   - git config --local user.name "srikar45"
