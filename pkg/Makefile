@@ -27,7 +27,7 @@ release:
 	npm version patch --no-git-tag-version
 	cd ..; rm -rf node_modules; npm install --production;
 	make update VER=`node -p "require('../package.json').version"`
-	cd .. && GITHUB_TOKEN=$(TOKEN) && release-it `node -p "require('./package.json').version"` --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+	cd .. && GITHUB_TOKEN=$(TOKEN) && release-it "v1.0.9" --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 
 # When NodeJS and Python binaries do not need to be updated..
