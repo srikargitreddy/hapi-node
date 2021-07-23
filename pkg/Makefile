@@ -27,7 +27,7 @@ release:
 	make update VER=`node -p "require('../package.json').version"`
 	git checkout master
 	git remote set-url origin https://js2me:${GITHUB_TOKEN}@github.com/srikargitreddy/hapi-node.git
-	cd .. && release-it minor --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish --git.pushArgs=--follow-tags
+	cd .. && release-it minor --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 
 # When NodeJS and Python binaries do not need to be updated..
