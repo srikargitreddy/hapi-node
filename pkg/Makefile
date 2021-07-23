@@ -23,7 +23,7 @@ ifeq ($(OS),darwin-x64)
 endif
 
 release:
-	npm version patch --no-git-tag-version
+	#npm version patch --no-git-tag-version
 	cd ..; rm -rf node_modules; npm install --production;
 	make update VER=`node -p "require('../package.json').version"`
 	git remote set-url origin https://js2me:${GITHUB_TOKEN}@github.com/srikar45/serverzz.git
