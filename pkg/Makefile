@@ -31,7 +31,7 @@ release:
 	cd .. && release-it minor --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish --git.pushArgs=--follow-tags --git.pushArgs=--force
 
 
-# When NodeJS and Python binaries do not need to be updated..
+# When NodeJS and Python binaries do not need to be updated
 update:
 	#pwd; sed -E -i '' 's/hapi-server-v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server-$(VERSION)/g' ../README.md
 	#sed -E -i '' 's/hapi-server:v[0-9]{1,}\.[0-9]{1,}\.[0-9]{1,}/hapi-server:$(VERSION)/g' ../README.md
