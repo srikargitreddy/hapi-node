@@ -2,8 +2,8 @@ language: node_js
 node_js: "10.16.3"
 script:
   - npm i release-it@13.2.0 --save
-  - git config --local user.name "srikar45"
-  - git config --local user.email "ksreddy4599@gmail.com"
+  - git config --local user.name "srikargitreddy"
+  - git config --local user.email "srikarreddygit@gmail.com"
   - echo $GITHUB_OAUTH_TOKEN
   - export GITHUB_TOKEN=$GITHUB_OAUTH_TOKEN
   - npm run release GIT_TOKEN=$GITHUB_OAUTH_TOKEN
