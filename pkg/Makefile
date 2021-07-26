@@ -24,6 +24,7 @@ endif
 
 release:
 	cd ..; rm -rf node_modules; npm install --production;
+	npm verison patch
 	make update VER=`node -p "require('../package.json').version"`
 	git remote set-url origin https://js2me:${GITHUB_TOKEN}@github.com/srikargitreddy/hapi-node.git
 	git checkout master
