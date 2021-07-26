@@ -24,9 +24,9 @@ endif
 
 release:
 	cd ..; rm -rf node_modules; npm install --production;
-	# git remote set-url origin https://js2me:${GITHUB_TOKEN}@github.com/srikargitreddy/hapi-node.git
-	# git checkout master
-	#cd .. && release-it minor --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+	git remote set-url origin https://js2me:${GITHUB_TOKEN}@github.com/srikargitreddy/hapi-node.git
+	git checkout master
+	cd .. && release-it minor --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 # When NodeJS and Python binaries do not need to be updated..
 update:

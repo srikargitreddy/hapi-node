@@ -4,12 +4,9 @@ script:
   - npm i release-it@13.2.0 --save
   - git config --local user.name "srikargitreddy"
   - git config --local user.email "srikarreddygit@gmail.com"
-  - echo $GITHUB_OAUTH_TOKEN
   - export GITHUB_TOKEN=$GITHUB_OAUTH_TOKEN
-  - git remote set-url origin https://js2me:${GITHUB_TOKEN}@github.com/srikargitreddy/hapi-node.git
-  - git checkout master
+  - git fetch
   - npm run release GIT_TOKEN=$GITHUB_OAUTH_TOKEN
-  - release-it minor --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 # script:
 #   - npm i release-it --save
