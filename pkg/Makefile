@@ -24,9 +24,14 @@ endif
 
 release:
 	cd ..; rm -rf node_modules; npm install --production;
+	make update VER=`node -p "require('../package.json').version"`
 	git remote set-url origin https://js2me:${GITHUB_TOKEN}@github.com/srikargitreddy/hapi-node.git
 	git checkout master
-	cd .. && release-it minor --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+	make beast VER=`node -p "require('../package.json').version"`
+
+beast:
+	cd .. && release-it $(VER) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+
 
 # When NodeJS and Python binaries do not need to be updated..
 update:
