@@ -1,6 +1,6 @@
 {
   "name": "hapi-server",
-  "version": "31.4.57",
+  "version": "31.4.58",
   "license": "MIT",
   "engine-strict": true,
   "engines": {
