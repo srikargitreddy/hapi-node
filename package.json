@@ -1,6 +1,6 @@
 {
   "name": "hapi-server",
-  "version": "32.0.2",
+  "version": "32.0.3",
   "license": "MIT",
   "engine-strict": true,
   "engines": {
@@ -49,12 +49,12 @@
   "release-it": {
     "github": {
       "release": true,
-      "requireCleanWorkingDir":false,
+      "requireCleanWorkingDir": false,
       "requireUpstream": false,
       "assets": [
         "pkg/dist/*.tgz"
       ],
-      "npm":{
+      "npm": {
         "publish": false
       }
     }
