@@ -24,13 +24,13 @@ endif
 
 release:
 	cd ..; rm -rf node_modules; npm install --production;
-	npm verison patch -prerelease
+	npm verison patch -no-git-tag-version
 	make update VER=`node -p "require('../package.json').version"`
 	git remote set-url origin https://js2me:${GITHUB_TOKEN}@github.com/srikargitreddy/hapi-node.git
 	git checkout master
-	make beast VER=`node -p "require('../package.json').version"`
+	make final_release VER=`node -p "require('../package.json').version"`
 
-beast:
+final_release:
 	cd .. && release-it $(VER) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
 
 
