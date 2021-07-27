@@ -30,7 +30,7 @@ release:
 	make final_release VER=`node -p "require('../package.json').version"`
 
 final_release:
-	cd .. && release-it $(VER) --preRelease=beta
+	cd .. && release-it $(VER) --preRelease=beta --no-npm.publish
 
 
 # When NodeJS and Python binaries do not need to be updated..
