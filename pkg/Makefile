@@ -27,11 +27,10 @@ release:
 	npm verison patch -no-git-tag-version
 	make update VER=`node -p "require('../package.json').version"`
 	git remote set-url origin https://js2me:${GITHUB_TOKEN}@github.com/srikargitreddy/hapi-node.git
-	git checkout master
 	make final_release VER=`node -p "require('../package.json').version"`
 
 final_release:
-	cd .. && release-it $(VER) --preRelease=beta --no-git.requireCleanWorkingDir --no-npm.publish
+	cd .. && release-it $(VER) --preRelease=beta
 
 
 # When NodeJS and Python binaries do not need to be updated..

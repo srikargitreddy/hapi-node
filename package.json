@@ -49,9 +49,14 @@
   "release-it": {
     "github": {
       "release": true,
+      "requireCleanWorkingDir":false,
+      "requireUpstream": false,
       "assets": [
         "pkg/dist/*.tgz"
-      ]
+      ],
+      "npm":{
+        "publish": false
+      }
     }
   }
 }
